@@ -1,0 +1,9 @@
+#!/bin/sh
+case $i in
+	"-zip")
+		;;	
+	"-rar")
+		;;
+	"-tar")
+		;;
+	esac

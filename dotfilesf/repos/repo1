@@ -1,0 +1,6 @@
+#!/bin/bash
+repo="$HOME/Documents/Gitlab/dotfiles"
+path1="$HOME/Documents/Gitlab/dotfiles/.config"
+path2="$HOME/Documents/Gitlab/dotfiles/home"
+folder1=$(ls -a $folder1)
+folder2=$(ls -a $folder2)

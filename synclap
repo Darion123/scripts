@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in ".scripts" "uni"; do
+	scp -r $HOME/$i dariolaptop:~
+done

@@ -1,0 +1,25 @@
+#!/bin/bash
+bak(){
+	#USO:bak $file $disco $diretorio
+	if [ -d /run/media/$2/backups/$3 ]; then
+		cp -r $1 /run/media/$2/backups/$3
+	else
+		mkdir /run/media/$2/backups/$3 && bak "$1" "$2" "$3"
+	fi
+}
+case $1 in
+	"ls")
+		printf "Discos: "; printf "%s " $(ls /run/media); printf "\n"
+		printf "Pastas: "; printf "%s " $(ls /run/media/HDD/backups);;
+	"ls-all")
+		printf "Discos: "; printf "%s " $(ls /run/media); printf "\n"
+		printf "Pastas: "; printf "%s " $(ls /run/media/HDD/backups); printf "\n"
+		for file in $(ls /run/media/HDD/backups); do
+			printf "$file:\n"; ls -a /run/media/HDD/backups/$file
+		done
+		;;
+	*)
+		for disk in $(ls /run/media); do
+			bak "$1" "$disk" "$2";
+		done
+esac

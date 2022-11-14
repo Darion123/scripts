@@ -1,0 +1,48 @@
+#!/bin/sh
+file=/home/$USER/.scripts/guitof
+#Uso: change $operacao $numero $pessoa
+change(){
+state=$(cat $file/$3) || state=0
+op=$1
+if [ "$op" = "add" ] || [ "$op" = "+" ]; then
+	next=$(($state+$2))
+elif [ "$op" = "rm" ] || [ "$op" = "-" ]; then
+	next=$(($state-2))
+else
+	printf "Bad operation"
+fi
+echo $next > $file/$3
+printf "%s:\n%d" $3 $(cat $file/$3)
+}
+case $2 in
+	"+" | "add")
+		if [ $1 != "all" ]; then
+			change "add" "$3" "$1"
+		else
+			for i in $(ls $file); do
+				change "add" "$3" "$i"
+			done
+		fi
+		;;
+	"-" | "rm")
+		if [ $1 != "all" ]; then
+			change "rm" "$3" "$1"
+		else
+			for i in $(ls $file); do
+				change "rm" "$3" "$i"
+			done
+		fi
+		;;
+	"clear")
+		rm -r $file/$1
+		;;
+	"ls")
+		if [ $1 != "all" ]; then
+			printf "%s:\n%d" $1 $(cat $file/$1)
+		else
+			for i in $(ls $file); do
+				printf "%s:\n%d\n" $i $(cat $file/$i)
+			done
+		fi
+		;;
+esac
