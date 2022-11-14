@@ -1,2 +1,0 @@
-#!/bin/bash
-cp -r $1 /run/media/HDD/backups && cp -r $1 /run/media/Barracuda/backups
